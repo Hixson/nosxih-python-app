@@ -3,6 +3,7 @@ kind: PersistentVolume
 metadata:
   name: qnap-nfs-pv
 spec:
+  storageClassName: ""
   capacity:
     storage: 10Gi
   volumeMode: Filesystem
@@ -18,6 +19,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: qnap-nfs-pvc
 spec:
+  storageClassName: ""
+  voluemName: qnap-nfs-pv
   accessModes:
     - ReadWriteMany
   resources:
