@@ -1,0 +1,30 @@
+name: Build and Push Image
+on:
+  push:
+    branches: [ "main" ]
+
+# This is the fix for the permission error
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          # Note: repository name must be lowercase in tags
+          tags: ghcr.io/${{ github.repository_owner }}/nosxih-python-app:latest
