@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nosxih-python-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nosxih-app
+  template:
+    metadata:
+      labels:
+        app: nosxih-app
+    spec:
+      containers:
+      - name: python-app
+        image: ghcr.io/hixson/nosxih-python-app:latest
+        ports:
+        - containerPort: 5000 # Corrected indentation: aligned under image
+        volumeMounts:
+        - name: qnap-volume
+          mountPath: /app/data # Python app looks for files here
+      volumes:
+      - name: qnap-volume
+        persistentVolumeClaim:
+          claimName: qnap-nfs-pvc
