@@ -27,4 +27,4 @@ jobs:
           context: .
           push: true
           # Note: repository name must be lowercase in tags
-          tags: ghcr.io/${{ github.repository_owner }}/nosxih-python-app:latest
+          tags: ghcr.io/hixson/nosxih-python-app:latest
