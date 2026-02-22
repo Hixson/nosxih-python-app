@@ -24,5 +24,9 @@ def index():
     <p><i>Version: 1.1</i></p>
     """
 
+@app.route('/test')
+def test():
+    return f"Now is the time for all good men to come to the aid of their country."
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
