@@ -16,10 +16,10 @@ spec:
     spec:
       containers:
       - name: python-app
-        image: ghcr.io/hixson/nosxih-python-app:4be646191a37833da1a440a9c033404f1ed231c0
+        image: ghcr.io/hixson/nosxih-python-app:eee05819f537281d21507d4c2e1706a50a236edd
         env:
         - name: APP_VERSION
-          value: "4be646191a37833da1a440a9c033404f1ed231c0"
+          value: "eee05819f537281d21507d4c2e1706a50a236edd"
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
