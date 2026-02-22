@@ -4,6 +4,7 @@ metadata:
   name: qnap-nfs-pv
 spec:
   storageClassName: ""
+  volumeName: qnap-nfs-pv
   capacity:
     storage: 10Gi
   volumeMode: Filesystem
