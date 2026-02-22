@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nosxih-python-app
+  annotations:
+    deployed-at: "initial"
 spec:
   replicas: 3
   selector:
