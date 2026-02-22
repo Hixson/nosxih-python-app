@@ -38,7 +38,7 @@ def health():
 @app.route('/storage')
 def storage_check():
     # Path where your QNAP is mounted inside the container
-    path = "/mnt/qnap" 
+    path = "/app/data" 
     total, used, free = shutil.disk_usage(path)
     
     return {
