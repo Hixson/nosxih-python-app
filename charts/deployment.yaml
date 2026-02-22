@@ -15,6 +15,7 @@ spec:
       containers:
       - name: python-app
         image: ghcr.io/hixson/nosxih-python-app:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000 # Corrected indentation: aligned under image
         volumeMounts:

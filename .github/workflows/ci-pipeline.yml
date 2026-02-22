@@ -5,7 +5,7 @@ on:
 
 # This is the fix for the permission error
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
       - name: Login to GHCR
         uses: docker/login-action@v3
         with:
@@ -28,3 +27,11 @@ jobs:
           push: true
           # Note: repository name must be lowercase in tags
           tags: ghcr.io/hixson/nosxih-python-app:latest
+      - name: Update Deployment Trigger
+        run: |
+          sed -i "s/deployed-at:.*/deployed-at: \"$(date)\"/" charts/deployment.yaml
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add charts/deployment.yaml
+          git commit -m "chore: trigger deployment update [skip ci]"
+          git push
