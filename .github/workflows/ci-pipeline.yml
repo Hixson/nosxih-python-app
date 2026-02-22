@@ -27,13 +27,14 @@ jobs:
           tags: |
             ghcr.io/hixson/nosxih-python-app:latest
             ghcr.io/hixson/nosxih-python-app:${{ github.sha }}
-
       - name: Update Deployment Image Tag
         run: |
-          # Updates the image line in deployment.yaml to the specific SHA tag
+          # Updates the image tag
           sed -i "s|image: ghcr.io/hixson/nosxih-python-app:.*|image: ghcr.io/hixson/nosxih-python-app:${{ github.sha }}|" charts/deployment.yaml
+          # Updates the APP_VERSION environment variable value
+          sed -i "s|value: \"[0-9a-f]\{40\}\"|value: \"${{ github.sha }}\"|" charts/deployment.yaml
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git add charts/deployment.yaml
-          git commit -m "chore: update image tag to ${{ github.sha }} [skip ci]"
+          git commit -m "chore: update image tag and version to ${{ github.sha }} [skip ci]"
           git push

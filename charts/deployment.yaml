@@ -17,12 +17,21 @@ spec:
       containers:
       - name: python-app
         image: ghcr.io/hixson/nosxih-python-app:593c948202d43a16aae1df08a5ce003cda4d5ec4
+        env:
+        - name: APP_VERSION
+          value: "593c948202d43a16aae1df08a5ce003cda4d5ec4"
         imagePullPolicy: Always
         ports:
-        - containerPort: 5000 # Corrected indentation: aligned under image
+        - containerPort: 5000
         volumeMounts:
         - name: qnap-volume
           mountPath: /app/data # Python app looks for files here
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
       volumes:
       - name: qnap-volume
         persistentVolumeClaim:
