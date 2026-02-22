@@ -1,5 +1,7 @@
 from flask import Flask
 import os
+import shutil
+
 
 app = Flask(__name__)
 
@@ -32,6 +34,19 @@ def test():
 def health():
     # You could add logic here to check if the QNAP mount is reachable
     return {"status": "healthy"}, 200
+
+@app.route('/storage')
+def storage_check():
+    # Path where your QNAP is mounted inside the container
+    path = "/mnt/qnap" 
+    total, used, free = shutil.disk_usage(path)
+    
+    return {
+        "total_gb": total // (2**30),
+        "used_gb": used // (2**30),
+        "free_gb": free // (2**30),
+        "percent_used": round((used/total) * 100, 2)
+    }
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
