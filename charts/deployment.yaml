@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nosxih-python-app
   annotations:
-    deployed-at: "Sun Feb 22 03:11:35 UTC 2026"
+    deployed-at: "Sun Feb 22 03:25:15 UTC 2026"
 spec:
   replicas: 3
   selector:
